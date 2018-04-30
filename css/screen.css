@@ -1,0 +1,76 @@
+.shell, pre, .mw-code, code, tt, div.mw-geshi {
+    font-family: 'andale mono', 'lucida console', monospace;
+}
+
+.shell, pre, .mw-code, div.mw-geshi {
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 2px solid #ccc;
+    line-height: 1.2em;
+    margin: 0 0 0.5em;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    background-color: #f9f9f9;
+    border-top: 0;
+}
+
+/* Code-box is used for the file template. */
+
+.box-caption {
+    border-radius: 6px 6px 0 0;
+    padding: 5px;
+    background-color: #44819b;
+    color: #fff;
+}
+
+.code-box {
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.code-box pre, .code-box .mw-code, .code-box div.mw-geshi {
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.code {
+    font-family: 'andale mono', 'lucida console', monospace;
+    border: none;
+    border-radius: 10px;
+    background-color: #002e3a;
+    color: #40b2d0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    line-height: 1.5em;
+}
+
+.code b {
+    font-weight: 700;
+    color: #eee;
+}
+
+.code_input {
+    color: #fff;
+    font-weight: 700;
+}
+
+.code_red {
+    color: red;
+}
+
+.code_blue {
+    color: #88f;
+}
+
+.code_green {
+    color: #0f0;
+}
+
+.code_yellow {
+    color: #ff0;
+}
+
+.code_cyan {
+    color: #0ff;
+}
+

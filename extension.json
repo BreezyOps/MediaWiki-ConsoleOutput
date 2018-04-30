@@ -1,0 +1,39 @@
+{
+  "name": "ConsoleOutput",
+  "author": [
+    "Daniel Robbins"
+  ],
+  "license-name": "GPL-2.0+",
+  "url": "https://www.mediawiki.org/wiki/Extension:ConsoleOutput",
+  "description": "A parser extension to display console output.",
+  "type": "parserhook",
+  "ResourceModules": {
+    "ext.console.css": {
+      "styles": {
+        "css/screen.css": {
+          "media": "screen"
+        },
+        "css/print.css": {
+          "media": "print"
+        }
+      },
+      "targets" : [
+        "mobile",
+        "desktop"
+      ]
+    }
+  },
+  "ResourceFileModulePaths" : {
+  	"localBasePath" : "",
+	"remoteExtPath" : "ConsoleOutput"
+},
+    "Hooks": {
+      "ParserFirstCallInit": [
+        "ConsoleOutput::onParserFirstCallInit"
+      ]
+    },
+    "AutoloadClasses": {
+      "ConsoleOutput": "ConsoleOutput.php"
+    },
+    "manifest_version": 1
+}
