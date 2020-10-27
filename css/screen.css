@@ -33,11 +33,10 @@
     border-radius: 0 0 4px 4px;
 }
 
-.code {
+pre.code {
     font-family: 'andale mono', 'lucida console', monospace;
     border: none;
-    border-radius: 10px;
-    background-color: #002e3a;
+    background-color: #0d3744;
     color: #40b2d0;
     overflow-x: auto;
     overflow-y: hidden;

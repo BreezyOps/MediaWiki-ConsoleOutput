@@ -11,7 +11,7 @@ class ConsoleOutput
 		return true;
 	}
 
-	public static function console($input, array $args, Parser $parser, PPFrame $frame)
+	public static function console($all_input, array $args, Parser $parser, PPFrame $frame)
 	{
 		try
 		{
@@ -21,11 +21,37 @@ class ConsoleOutput
 						   "ConsoleOutput: arguments not supported" .
 						   "</strong>";
 				}
+								# Display < and > as literals, so escape them:
 
-				# Display < and > as literals, so escape them:
+				$all_input = preg_replace('/>/','&gt;', $all_input);
+				$all_input = preg_replace('/</','&lt;', $all_input);
 
-				$input = preg_replace('/>/','&gt;', $input);
-				$input = preg_replace('/</','&lt;', $input);
+				$all_input = explode("\n", $all_input);
+				$string_out = "";
+				foreach($all_input as $input) {
+				if ( $string_out != "" )
+					$string_out .= "\n";
+				if ( substr($input, 0, 1) == "#" ) {
+					$input = '<span class="code_root">root</span> <span class="code_blue">#</span>' . substr($input, 1);
+				} else if ( substr($input, 0, 1) == "$") {
+					$input = '<span class="code_user">user</span> <span class="code_blue">$</span>' . substr($input, 1);
+				} else if ( substr($input, 0, 1) == "%") {
+					// special hostname expansion
+					$input = substr($input, 1);
+					$other = strpos($input, '%');
+					if ( $other != FALSE ) {
+						$hostname = substr($input, 0, $other);
+						if (substr($hostname, 0, 1) == '$') {
+							$hostname = substr($hostname, 1);
+							$prompt = '$';
+						} else {
+							$prompt = '#';
+						}
+						$input = "<span class=\"code_host\">$hostname</span> <span class=\"code_blue\">$prompt</span>" . substr($input, $other + 1);
+					}
+				} else if ( substr($input, 0, 1) == "\\") {
+					$input = substr($input, 1);
+				}
 
 				# http://www.perlmonks.org/?node_id=518444
 				# See "Matching a pattern that doesn't include another pattern:
@@ -51,10 +77,12 @@ class ConsoleOutput
 				#bold
 				$input = preg_replace('/##b##((?:(?!##!b##).)*)##!b##/','<b>$1</b>', $input);
 				$input = preg_replace('/##b##(.*)/','<b>$1</b>', $input);
-
+				$string_out .= $input;
+				}
+				
 				$out = $parser->getOutput();
-				$out->addModules( 'ext.console.css' );
-				return "<pre class=\"code\">" . $input . "</pre>";
+#				$out->addModules( 'ext.console.css' );
+				return "<pre class=\"code\">" . $string_out . "</pre>";
 		}
 		catch (Exception $e)
 		{
